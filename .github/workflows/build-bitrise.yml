@@ -55,7 +55,7 @@ jobs:
       - name: Fetch Chromium source & resources
         run: |
           source ./env.sh
-          ./retrieve_and_unpack_resource.sh -g arm64
+          ./retrieve_and_unpack_resource.sh -d -g arm64
 
       - name: Apply patches & substitutions
         run: |
