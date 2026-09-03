@@ -19,3 +19,12 @@ helium/macos/applescript-tab-select-command.patch
 helium/macos/open-shortcuts-settings-action.patch
 
 helium/macos/native-translation-context-option.patch
+
+# Custom macOS SDK compatibility patches (Xcode 16 / macOS Sonoma 14 public SDK)
+custom/fix-posix-spawn-addchdir.patch
+custom/fix-mojo-fileport.patch
+custom/fix-skia-cgimage-byteorder.patch
+custom/fix-screen-utils-displayid.patch
+custom/fix-ax-comprehensive-constants.patch
+custom/fix-appkit-utils-pasteboard.patch
+custom/fix-browser-accessibility-cocoa-constants.patch

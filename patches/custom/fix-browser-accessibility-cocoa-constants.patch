@@ -1,0 +1,70 @@
+--- a/ui/accessibility/platform/browser_accessibility_cocoa.mm
++++ b/ui/accessibility/platform/browser_accessibility_cocoa.mm
+@@ -47,6 +47,67 @@
+ #include "ui/accessibility/platform/browser_accessibility_cocoa_test_helpers.h"
+ #include "ui/accessibility/platform/browser_accessibility_mac.h"
+ #include "ui/accessibility/platform/browser_accessibility_manager.h"
++
++// Fallback NSString definitions for private NSAccessibility Search keys
++// and kAX* text marker constants (missing from macOS Sonoma 14 public SDK).
++#ifndef NSAccessibilitySearchCurrentElementKey
++#define NSAccessibilitySearchCurrentElementKey @"AXSearchCurrentElement"
++#endif
++#ifndef NSAccessibilitySearchDirectionKey
++#define NSAccessibilitySearchDirectionKey @"AXSearchDirection"
++#endif
++#ifndef NSAccessibilitySearchDirectionNext
++#define NSAccessibilitySearchDirectionNext @"AXSearchDirectionNext"
++#endif
++#ifndef NSAccessibilitySearchDirectionPrevious
++#define NSAccessibilitySearchDirectionPrevious @"AXSearchDirectionPrevious"
++#endif
++#ifndef NSAccessibilitySearchResultsLimitKey
++#define NSAccessibilitySearchResultsLimitKey @"AXSearchResultsLimit"
++#endif
++#ifndef NSAccessibilitySearchTextKey
++#define NSAccessibilitySearchTextKey @"AXSearchText"
++#endif
++#ifndef NSAccessibilitySearchIdentifiersKey
++#define NSAccessibilitySearchIdentifiersKey @"AXSearchIdentifiers"
++#endif
++#ifndef kAXLeftWordTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXLeftWordTextMarkerRangeForTextMarkerParameterizedAttribute @"AXLeftWordTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXRightWordTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXRightWordTextMarkerRangeForTextMarkerParameterizedAttribute @"AXRightWordTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXPreviousWordStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousWordStartTextMarkerForTextMarkerParameterizedAttribute @"AXPreviousWordStartTextMarkerForTextMarker"
++#endif
++#ifndef kAXLeftLineTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXLeftLineTextMarkerRangeForTextMarkerParameterizedAttribute @"AXLeftLineTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXRightLineTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXRightLineTextMarkerRangeForTextMarkerParameterizedAttribute @"AXRightLineTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXPreviousLineStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousLineStartTextMarkerForTextMarkerParameterizedAttribute @"AXPreviousLineStartTextMarkerForTextMarker"
++#endif
++#ifndef kAXSentenceTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXSentenceTextMarkerRangeForTextMarkerParameterizedAttribute @"AXSentenceTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXParagraphTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXParagraphTextMarkerRangeForTextMarkerParameterizedAttribute @"AXParagraphTextMarkerRangeForTextMarker"
++#endif
++#ifndef kAXNextParagraphEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextParagraphEndTextMarkerForTextMarkerParameterizedAttribute @"AXNextParagraphEndTextMarkerForTextMarker"
++#endif
++#ifndef kAXPreviousParagraphStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousParagraphStartTextMarkerForTextMarkerParameterizedAttribute @"AXPreviousParagraphStartTextMarkerForTextMarker"
++#endif
++#ifndef kAXNextSentenceEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextSentenceEndTextMarkerForTextMarkerParameterizedAttribute @"AXNextSentenceEndTextMarkerForTextMarker"
++#endif
++#ifndef kAXPreviousSentenceStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousSentenceStartTextMarkerForTextMarkerParameterizedAttribute @"AXPreviousSentenceStartTextMarkerForTextMarker"
++#endif
++
+ #include "ui/accessibility/platform/browser_accessibility_manager_mac.h"
+ #include "ui/accessibility/platform/one_shot_accessibility_tree_search.h"
+ #include "ui/base/l10n/l10n_util.h"

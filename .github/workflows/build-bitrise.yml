@@ -1,0 +1,123 @@
+name: Build Helium macOS arm64 (Bitrise M2 Pro)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build Helium (arm64)
+    runs-on: bitrise-runner-macOS
+    timeout-minutes: 1440
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Inspect Runner Hardware
+        run: |
+          echo "=== Architecture ===" && uname -m
+          echo "=== macOS Version ===" && sw_vers
+          echo "=== CPU ===" && sysctl -n hw.ncpu && sysctl -n machdep.cpu.brand_string || true
+          echo "=== RAM ===" && sysctl -n hw.memsize
+          echo "=== Disk ===" && df -h /
+          echo "=== Xcode ===" && xcodebuild -version || true
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf "$ANDROID_HOME" "$ANDROID_NDK_HOME" /Library/Developer/CommandLineTools || true
+          sudo mdutil -a -i off || true
+          df -h /
+
+      - name: Prepare Xcode
+        run: |
+          AVAILABLE_XCODE=$(ls -d /Applications/Xcode_16*.app /Applications/Xcode*.app 2>/dev/null | sort -V | tail -n 1)
+          if [ -n "$AVAILABLE_XCODE" ] && [ -d "$AVAILABLE_XCODE" ]; then
+            sudo xcode-select --switch "$AVAILABLE_XCODE/Contents/Developer" 2>/dev/null || \
+              sudo xcode-select --switch "$AVAILABLE_XCODE" 2>/dev/null || true
+          fi
+          echo "Active Xcode: $(xcode-select -p)" && xcodebuild -version || true
+
+      - name: Install build dependencies
+        run: |
+          brew install coreutils ninja go || true
+          pip3 install httplib2 PySocks --break-system-packages || pip install httplib2 PySocks || true
+
+      - name: Fetch Chromium source & resources
+        run: |
+          source ./env.sh
+          ./retrieve_and_unpack_resource.sh -g arm64
+
+      - name: Apply patches & substitutions
+        run: |
+          source ./env.sh
+          mkdir -p "$_out_dir"
+          python3 "$_main_repo/utils/prune_binaries.py" "$_src_dir" "$_main_repo/pruning.list"
+          ./retrieve_and_unpack_resource.sh -t
+          ./devutils/setup_dawn_go.sh "$_src_dir" "$_depot_tools_dir" arm64
+          python3 "$_main_repo/utils/patches.py" apply "$_src_dir" "$_main_repo/patches" "$_root_dir/patches"
+          python3 "$_main_repo/utils/domain_substitution.py" apply -r "$_main_repo/domain_regex.list" -f "$_main_repo/domain_substitution.list" "$_src_dir"
+          python3 "$_main_repo/utils/name_substitution.py" --sub -t "$_src_dir"
+          python3 "$_main_repo/utils/i18n_apply.py" -t "$_src_dir"
+          python3 "$_main_repo/utils/helium_version.py" --tree "$_main_repo" --platform-tree "$_root_dir" --chromium-tree "$_src_dir"
+          python3 "$_main_repo/utils/generate_resources.py" "$_main_repo/resources/generate_resources.txt" "$_main_repo/resources"
+          python3 "$_main_repo/utils/replace_resources.py" "$_root_dir/resources/platform_resources.txt" "$_root_dir/resources" "$_src_dir"
+          python3 "$_main_repo/utils/replace_resources.py" "$_main_repo/resources/helium_resources.txt" "$_main_repo/resources" "$_src_dir"
+          cat "$_main_repo/flags.gn" "$_root_dir/flags.macos.gn" > "$_out_dir/args.gn"
+          echo 'target_cpu = "arm64"' >> "$_out_dir/args.gn"
+
+      - name: Bootstrap GN & generate build graph
+        run: |
+          source ./env.sh
+          cd "$_src_dir"
+          ./tools/gn/bootstrap/bootstrap.py -o out/Default/gn --skip-generate-buildfiles
+          ./tools/rust/build_bindgen.py --skip-test
+          ./out/Default/gn gen out/Default --fail-on-unused-args
+
+      - name: Compile Helium arm64 — 12 cores
+        run: |
+          source ./env.sh
+          cd "$_src_dir"
+          CORES="$(sysctl -n hw.ncpu)"
+          echo "Compiling with $CORES threads on Bitrise M2 Pro..."
+          ninja -C out/Default -j"$CORES" chrome chromedriver
+
+      - name: Validate binary
+        run: |
+          source ./env.sh
+          APP=$(ls -d "$_out_dir"/*.app 2>/dev/null | head -1)
+          if [ -n "$APP" ]; then
+            BIN="$APP/Contents/MacOS/$(basename "$APP" .app)"
+            file "$BIN" || true
+            lipo -info "$BIN" || true
+            du -sh "$APP"
+          fi
+
+      - name: Package DMG & ZIP
+        run: |
+          source ./env.sh
+          CHROMIUM_SRC_DIR="$_src_dir" ./sign_and_package_app.sh || true
+          cd "$_out_dir"
+          APP=$(ls -d *.app 2>/dev/null | head -1)
+          if [ -n "$APP" ]; then
+            ditto -c -k --sequesterRsrc --keepParent "$APP" "$OLDPWD/Helium-macOS-arm64.zip"
+          fi
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: helium-macos-arm64
+          path: |
+            Helium-macOS-arm64.zip
+            build/src/out/Default/*.dmg
+            build/src/out/Default/*.zip
+          retention-days: 7

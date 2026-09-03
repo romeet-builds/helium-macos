@@ -1,0 +1,18 @@
+--- a/ui/base/cocoa/appkit_utils.mm
++++ b/ui/base/cocoa/appkit_utils.mm
+@@ -40,14 +40,7 @@
+ }
+ 
+ bool PasteMightBlockWithPrivacyAlert() {
+-  if (@available(macOS 15.4, *)) {
+-    NSPasteboardAccessBehavior behavior =
+-        NSPasteboard.generalPasteboard.accessBehavior;
+-    return behavior == NSPasteboardAccessBehaviorDefault ||
+-           behavior == NSPasteboardAccessBehaviorAsk;
+-  } else {
+-    return false;
+-  }
++  return false;
+ }
+ 
+ UTType* UTTypeForServicesType(NSString* type) {

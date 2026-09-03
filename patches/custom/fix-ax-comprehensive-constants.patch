@@ -1,0 +1,267 @@
+--- a/ui/accessibility/platform/ax_private_webkit_constants_mac.h
++++ b/ui/accessibility/platform/ax_private_webkit_constants_mac.h
+@@ -9,6 +9,264 @@
+ #import <Foundation/Foundation.h>
+ 
+ #include "base/component_export.h"
++
++
++// Comprehensive fallback definitions for private Apple WebKit accessibility symbols.
++#ifndef kAXExpandedChangedNotification
++#define kAXExpandedChangedNotification CFSTR("AXExpandedChanged")
++#endif
++#ifndef kAXInvalidStatusChangedNotification
++#define kAXInvalidStatusChangedNotification CFSTR("AXInvalidStatusChanged")
++#endif
++#ifndef kAXLiveRegionChangedNotification
++#define kAXLiveRegionChangedNotification CFSTR("AXLiveRegionChanged")
++#endif
++#ifndef kAXLiveRegionCreatedNotification
++#define kAXLiveRegionCreatedNotification CFSTR("AXLiveRegionCreated")
++#endif
++#ifndef kAXLoadCompleteNotification
++#define kAXLoadCompleteNotification CFSTR("AXLoadComplete")
++#endif
++#ifndef kAXElementBusyChangedNotification
++#define kAXElementBusyChangedNotification CFSTR("AXElementBusyChanged")
++#endif
++#ifndef kAXMenuClosedNotification
++#define kAXMenuClosedNotification CFSTR("AXMenuClosed")
++#endif
++#ifndef kAXMenuItemSelectedNotification
++#define kAXMenuItemSelectedNotification CFSTR("AXMenuItemSelected")
++#endif
++#ifndef kAXMenuOpenedNotification
++#define kAXMenuOpenedNotification CFSTR("AXMenuOpened")
++#endif
++#ifndef kAXSelectedTextMarkerRangeAttribute
++#define kAXSelectedTextMarkerRangeAttribute CFSTR("AXSelectedTextMarkerRange")
++#endif
++#ifndef kAXDOMIdentifierAttribute
++#define kAXDOMIdentifierAttribute CFSTR("AXDOMIdentifier")
++#endif
++#ifndef kAXDOMClassListAttribute
++#define kAXDOMClassListAttribute CFSTR("AXDOMClassList")
++#endif
++#ifndef kAXARIARowCountAttribute
++#define kAXARIARowCountAttribute CFSTR("AXARIARowCount")
++#endif
++#ifndef kAXARIARowIndexAttribute
++#define kAXARIARowIndexAttribute CFSTR("AXARIARowIndex")
++#endif
++#ifndef kAXARIASetSizeAttribute
++#define kAXARIASetSizeAttribute CFSTR("AXARIASetSize")
++#endif
++#ifndef kAXBrailleLabelAttribute
++#define kAXBrailleLabelAttribute CFSTR("AXBrailleLabel")
++#endif
++#ifndef kAXBrailleRoleDescriptionAttribute
++#define kAXBrailleRoleDescriptionAttribute CFSTR("AXBrailleRoleDescription")
++#endif
++#ifndef kAXDropEffectsAttribute
++#define kAXDropEffectsAttribute CFSTR("AXDropEffects")
++#endif
++#ifndef kAXElementBusyAttribute
++#define kAXElementBusyAttribute CFSTR("AXElementBusy")
++#endif
++#ifndef kAXFocusableAncestorAttribute
++#define kAXFocusableAncestorAttribute CFSTR("AXFocusableAncestor")
++#endif
++#ifndef kAXGrabbedAttribute
++#define kAXGrabbedAttribute CFSTR("AXGrabbed")
++#endif
++#ifndef kAXHasPopupAttribute
++#define kAXHasPopupAttribute CFSTR("AXHasPopup")
++#endif
++#ifndef kAXInvalidAttribute
++#define kAXInvalidAttribute CFSTR("AXInvalid")
++#endif
++#ifndef kAXKeyShortcutsAttribute
++#define kAXKeyShortcutsAttribute CFSTR("AXKeyShortcuts")
++#endif
++#ifndef kAXLoadedAttribute
++#define kAXLoadedAttribute CFSTR("AXLoaded")
++#endif
++#ifndef kAXLoadingProgressAttribute
++#define kAXLoadingProgressAttribute CFSTR("AXLoadingProgress")
++#endif
++#ifndef kAXMathBaseAttribute
++#define kAXMathBaseAttribute CFSTR("AXMathBase")
++#endif
++#ifndef kAXMathFractionDenominatorAttribute
++#define kAXMathFractionDenominatorAttribute CFSTR("AXMathFractionDenominator")
++#endif
++#ifndef kAXMathFractionNumeratorAttribute
++#define kAXMathFractionNumeratorAttribute CFSTR("AXMathFractionNumerator")
++#endif
++#ifndef kAXMathOverAttribute
++#define kAXMathOverAttribute CFSTR("AXMathOver")
++#endif
++#ifndef kAXMathPostscriptsAttribute
++#define kAXMathPostscriptsAttribute CFSTR("AXMathPostscripts")
++#endif
++#ifndef kAXMathPrescriptsAttribute
++#define kAXMathPrescriptsAttribute CFSTR("AXMathPrescripts")
++#endif
++#ifndef kAXMathRootIndexAttribute
++#define kAXMathRootIndexAttribute CFSTR("AXMathRootIndex")
++#endif
++#ifndef kAXMathRootRadicandAttribute
++#define kAXMathRootRadicandAttribute CFSTR("AXMathRootRadicand")
++#endif
++#ifndef kAXMathSubscriptAttribute
++#define kAXMathSubscriptAttribute CFSTR("AXMathSubscript")
++#endif
++#ifndef kAXMathSuperscriptAttribute
++#define kAXMathSuperscriptAttribute CFSTR("AXMathSuperscript")
++#endif
++#ifndef kAXMathUnderAttribute
++#define kAXMathUnderAttribute CFSTR("AXMathUnder")
++#endif
++#ifndef kAXOwnsAttribute
++#define kAXOwnsAttribute CFSTR("AXOwns")
++#endif
++#ifndef kAXPopupValueAttribute
++#define kAXPopupValueAttribute CFSTR("AXPopupValue")
++#endif
++#ifndef kAXAccessKeyAttribute
++#define kAXAccessKeyAttribute CFSTR("AXAccessKey")
++#endif
++#ifndef kAXARIAAtomicAttribute
++#define kAXARIAAtomicAttribute CFSTR("AXARIAAtomic")
++#endif
++#ifndef kAXARIAColumnCountAttribute
++#define kAXARIAColumnCountAttribute CFSTR("AXARIAColumnCount")
++#endif
++#ifndef kAXARIAColumnIndexAttribute
++#define kAXARIAColumnIndexAttribute CFSTR("AXARIAColumnIndex")
++#endif
++#ifndef kAXARIACurrentAttribute
++#define kAXARIACurrentAttribute CFSTR("AXARIACurrent")
++#endif
++#ifndef kAXARIALiveAttribute
++#define kAXARIALiveAttribute CFSTR("AXARIALive")
++#endif
++#ifndef kAXARIAPosInSetAttribute
++#define kAXARIAPosInSetAttribute CFSTR("AXARIAPosInSet")
++#endif
++#ifndef kAXARIARelevantAttribute
++#define kAXARIARelevantAttribute CFSTR("AXARIARelevant")
++#endif
++#ifndef kAXEndTextMarkerAttribute
++#define kAXEndTextMarkerAttribute CFSTR("AXEndTextMarker")
++#endif
++#ifndef kAXStartTextMarkerAttribute
++#define kAXStartTextMarkerAttribute CFSTR("AXStartTextMarker")
++#endif
++#ifndef kAXValueAutofillAvailableAttribute
++#define kAXValueAutofillAvailableAttribute CFSTR("AXValueAutofillAvailable")
++#endif
++#ifndef kAXFieldsetSubrole
++#define kAXFieldsetSubrole CFSTR("AXFieldset")
++#endif
++#ifndef kAXEmptyGroupSubrole
++#define kAXEmptyGroupSubrole CFSTR("AXEmptyGroup")
++#endif
++#ifndef kAXUIElementForTextMarkerParameterizedAttribute
++#define kAXUIElementForTextMarkerParameterizedAttribute CFSTR("AXUIElementForTextMarker")
++#endif
++#ifndef kAXTextMarkerRangeForLineParameterizedAttribute
++#define kAXTextMarkerRangeForLineParameterizedAttribute CFSTR("AXTextMarkerRangeForLine")
++#endif
++#ifndef kAXBoundsForTextMarkerRangeParameterizedAttribute
++#define kAXBoundsForTextMarkerRangeParameterizedAttribute CFSTR("AXBoundsForTextMarkerRange")
++#endif
++#ifndef kAXLengthForTextMarkerRangeParameterizedAttribute
++#define kAXLengthForTextMarkerRangeParameterizedAttribute CFSTR("AXLengthForTextMarkerRange")
++#endif
++#ifndef kAXLineForTextMarkerParameterizedAttribute
++#define kAXLineForTextMarkerParameterizedAttribute CFSTR("AXLineForTextMarker")
++#endif
++#ifndef kAXLineTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXLineTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXLineTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXNextLineEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextLineEndTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXNextLineEndTextMarkerForTextMarker")
++#endif
++#ifndef kAXNextTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXNextTextMarkerForTextMarker")
++#endif
++#ifndef kAXNextWordEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextWordEndTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXNextWordEndTextMarkerForTextMarker")
++#endif
++#ifndef kAXPreviousTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXPreviousTextMarkerForTextMarker")
++#endif
++#ifndef kAXStringForTextMarkerRangeParameterizedAttribute
++#define kAXStringForTextMarkerRangeParameterizedAttribute CFSTR("AXStringForTextMarkerRange")
++#endif
++#ifndef kAXStyleTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXStyleTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXStyleTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXTextMarkerForPositionParameterizedAttribute
++#define kAXTextMarkerForPositionParameterizedAttribute CFSTR("AXTextMarkerForPosition")
++#endif
++#ifndef kAXTextMarkerRangeForUIElementParameterizedAttribute
++#define kAXTextMarkerRangeForUIElementParameterizedAttribute CFSTR("AXTextMarkerRangeForUIElement")
++#endif
++#ifndef kAXTextMarkerIsValidParameterizedAttribute
++#define kAXTextMarkerIsValidParameterizedAttribute CFSTR("AXTextMarkerIsValid")
++#endif
++#ifndef kAXIndexForTextMarkerParameterizedAttribute
++#define kAXIndexForTextMarkerParameterizedAttribute CFSTR("AXIndexForTextMarker")
++#endif
++#ifndef kAXTextMarkerForIndexParameterizedAttribute
++#define kAXTextMarkerForIndexParameterizedAttribute CFSTR("AXTextMarkerForIndex")
++#endif
++#ifndef kAXSortDirectionAttribute
++#define kAXSortDirectionAttribute CFSTR("AXSortDirection")
++#endif
++#ifndef kAXNextParagraphEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextParagraphEndTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXNextParagraphEndTextMarkerForTextMarker")
++#endif
++#ifndef kAXNextSentenceEndTextMarkerForTextMarkerParameterizedAttribute
++#define kAXNextSentenceEndTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXNextSentenceEndTextMarkerForTextMarker")
++#endif
++#ifndef kAXPreviousParagraphStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousParagraphStartTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXPreviousParagraphStartTextMarkerForTextMarker")
++#endif
++#ifndef kAXPreviousSentenceStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousSentenceStartTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXPreviousSentenceStartTextMarkerForTextMarker")
++#endif
++#ifndef kAXSentenceTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXSentenceTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXSentenceTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXParagraphTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXParagraphTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXParagraphTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXPreviousLineStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousLineStartTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXPreviousLineStartTextMarkerForTextMarker")
++#endif
++#ifndef kAXPreviousWordStartTextMarkerForTextMarkerParameterizedAttribute
++#define kAXPreviousWordStartTextMarkerForTextMarkerParameterizedAttribute CFSTR("AXPreviousWordStartTextMarkerForTextMarker")
++#endif
++#ifndef kAXLeftLineTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXLeftLineTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXLeftLineTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXLeftWordTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXLeftWordTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXLeftWordTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXRightLineTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXRightLineTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXRightLineTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXRightWordTextMarkerRangeForTextMarkerParameterizedAttribute
++#define kAXRightWordTextMarkerRangeForTextMarkerParameterizedAttribute CFSTR("AXRightWordTextMarkerRangeForTextMarker")
++#endif
++#ifndef kAXTextMarkerRangeForUnorderedTextMarkersParameterizedAttribute
++#define kAXTextMarkerRangeForUnorderedTextMarkersParameterizedAttribute CFSTR("AXTextMarkerRangeForUnorderedTextMarkers")
++#endif
++#ifndef kAXCustomActionNamesForTestingAttribute
++#define kAXCustomActionNamesForTestingAttribute CFSTR("AXCustomActionNamesForTesting")
++#endif
++#ifndef kAXResultsLimitNoLimit
++#define kAXResultsLimitNoLimit 0
++#endif
+ 
+ namespace ui {
+ 
