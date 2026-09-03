@@ -1,0 +1,11 @@
+--- a/ui/accessibility/platform/inspect/ax_element_wrapper_mac.mm
++++ b/ui/accessibility/platform/inspect/ax_element_wrapper_mac.mm
+@@ -123,7 +123,7 @@
+ 
+ std::string AXElementWrapper::DOMId() const {
+   id domid_value =
+-      *GetAttributeValue(base::apple::CFToNSPtrCast(kAXDOMIdentifierAttribute));
++      *GetAttributeValue(@"AXDOMIdentifier");
+   return base::SysNSStringToUTF8(base::apple::ObjCCast<NSString>(domid_value));
+ }
+ 

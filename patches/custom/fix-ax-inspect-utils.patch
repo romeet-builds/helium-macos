@@ -1,0 +1,105 @@
+--- a/ui/accessibility/platform/inspect/ax_inspect_utils_mac.mm
++++ b/ui/accessibility/platform/inspect/ax_inspect_utils_mac.mm
+@@ -53,13 +53,13 @@
+   AXElementWrapper nsNode((__bridge id)node);
+   NSString* nsIDOrClass = base::SysUTF8ToNSString(idOrClass);
+   NSString* idValue =
+-      *nsNode.GetAttributeValue(CFToNSPtrCast(kAXDOMIdentifierAttribute));
++      *nsNode.GetAttributeValue(@"AXDOMIdentifier");
+   if ([idValue isEqualToString:nsIDOrClass]) {
+     return true;
+   }
+ 
+   NSArray* classList =
+-      *nsNode.GetAttributeValue(CFToNSPtrCast(kAXDOMClassListAttribute));
++      *nsNode.GetAttributeValue(@"AXDOMClassList");
+   return [classList containsObject:nsIDOrClass];
+ }
+ 
+@@ -67,50 +67,50 @@
+ 
+ bool IsValidAXAttribute(const std::string& attribute) {
+   static NSSet<NSString*>* valid_attributes = [NSSet setWithArray:@[
+-    CFToNSPtrCast(kAXAccessKeyAttribute),
+-    CFToNSPtrCast(kAXARIAAtomicAttribute),
++    @"AXAccessKey",
++    @"AXARIAAtomic",
+     NSAccessibilityARIABusyAttribute,
+-    CFToNSPtrCast(kAXARIAColumnCountAttribute),
+-    CFToNSPtrCast(kAXARIAColumnIndexAttribute),
+-    CFToNSPtrCast(kAXARIACurrentAttribute),
+-    CFToNSPtrCast(kAXARIALiveAttribute),
+-    CFToNSPtrCast(kAXARIAPosInSetAttribute),
+-    CFToNSPtrCast(kAXARIARelevantAttribute),
+-    CFToNSPtrCast(kAXARIARowCountAttribute),
+-    CFToNSPtrCast(kAXARIARowIndexAttribute),
+-    CFToNSPtrCast(kAXARIASetSizeAttribute),
++    @"AXARIAColumnCount",
++    @"AXARIAColumnIndex",
++    @"AXARIACurrent",
++    @"AXARIALive",
++    @"AXARIAPosInSet",
++    @"AXARIARelevant",
++    @"AXARIARowCount",
++    @"AXARIARowIndex",
++    @"AXARIASetSize",
+     NSAccessibilityAutocompleteValueAttribute,
+     NSAccessibilityBlockQuoteLevelAttribute,
+-    CFToNSPtrCast(kAXBrailleLabelAttribute),
+-    CFToNSPtrCast(kAXBrailleRoleDescriptionAttribute),
++    @"AXBrailleLabel",
++    @"AXBrailleRoleDescription",
+     NSAccessibilityChromeAXNodeIdAttribute,
+     NSAccessibilityColumnHeaderUIElementsAttribute,
+     NSAccessibilityDescriptionAttribute,
+     NSAccessibilityDetailsElementsAttribute,
+-    CFToNSPtrCast(kAXDOMClassListAttribute),
+-    CFToNSPtrCast(kAXDropEffectsAttribute),
+-    CFToNSPtrCast(kAXElementBusyAttribute),
+-    CFToNSPtrCast(kAXFocusableAncestorAttribute),
+-    CFToNSPtrCast(kAXGrabbedAttribute),
+-    CFToNSPtrCast(kAXHasPopupAttribute),
+-    CFToNSPtrCast(kAXInvalidAttribute),
++    @"AXDOMClassList",
++    @"AXDropEffects",
++    @"AXElementBusy",
++    @"AXFocusableAncestor",
++    @"AXGrabbed",
++    @"AXHasPopup",
++    @"AXInvalid",
+     NSAccessibilityIsMultiSelectable,
+-    CFToNSPtrCast(kAXKeyShortcutsAttribute),
+-    CFToNSPtrCast(kAXLoadedAttribute),
+-    CFToNSPtrCast(kAXLoadingProgressAttribute),
+-    CFToNSPtrCast(kAXMathBaseAttribute),
+-    CFToNSPtrCast(kAXMathFractionDenominatorAttribute),
+-    CFToNSPtrCast(kAXMathFractionNumeratorAttribute),
+-    CFToNSPtrCast(kAXMathOverAttribute),
+-    CFToNSPtrCast(kAXMathPostscriptsAttribute),
+-    CFToNSPtrCast(kAXMathPrescriptsAttribute),
+-    CFToNSPtrCast(kAXMathRootIndexAttribute),
+-    CFToNSPtrCast(kAXMathRootRadicandAttribute),
+-    CFToNSPtrCast(kAXMathSubscriptAttribute),
+-    CFToNSPtrCast(kAXMathSuperscriptAttribute),
+-    CFToNSPtrCast(kAXMathUnderAttribute),
+-    CFToNSPtrCast(kAXOwnsAttribute),
+-    CFToNSPtrCast(kAXPopupValueAttribute),
++    @"AXKeyShortcuts",
++    @"AXLoaded",
++    @"AXLoadingProgress",
++    @"AXMathBase",
++    @"AXMathFractionDenominator",
++    @"AXMathFractionNumerator",
++    @"AXMathOver",
++    @"AXMathPostscripts",
++    @"AXMathPrescripts",
++    @"AXMathRootIndex",
++    @"AXMathRootRadicand",
++    @"AXMathSubscript",
++    @"AXMathSuperscript",
++    @"AXMathUnder",
++    @"AXOwns",
++    @"AXPopupValue",
+     NSAccessibilityRequiredAttribute,
+     NSAccessibilityRoleDescriptionAttribute,
+     NSAccessibilitySelectedAttribute,

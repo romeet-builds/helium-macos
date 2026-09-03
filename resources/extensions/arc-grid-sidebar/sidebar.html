@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div class="sidebar-container">
+    <!-- Header / Spaces / Search -->
+    <div class="header-section">
+      <div class="action-row">
+        <button id="new-tab-btn" class="icon-btn" title="New Tab (Cmd+T)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <span class="header-title">Favorites</span>
+        <button id="settings-btn" class="icon-btn" title="Grid Settings">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+
+      <!-- Arc 2x3 Pinned Favorites Grid -->
+      <div id="pinned-grid" class="pinned-grid" data-columns="3">
+        <!-- Pinned tab items injected by JS -->
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider">
+      <span>Open Tabs</span>
+      <div class="line"></div>
+    </div>
+
+    <!-- Unpinned / Active Tabs List -->
+    <div id="tab-list" class="tab-list">
+      <!-- Unpinned tabs injected by JS -->
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="settings-modal hidden">
+      <div class="settings-header">
+        <span>Settings</span>
+        <button id="close-settings-btn" class="icon-btn" title="Close">&#215;</button>
+      </div>
+      <div class="settings-content">
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-title">Auto-hide Sidebar</span>
+            <span class="setting-desc">Expands smoothly on hover</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="autohide-toggle">
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info">
+            <span class="setting-title">2x3 Pinned Grid</span>
+            <span class="setting-desc">Show compact favorites grid</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="grid-toggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+</body>
+</html>

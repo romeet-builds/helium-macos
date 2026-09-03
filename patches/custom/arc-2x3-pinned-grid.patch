@@ -1,0 +1,33 @@
+--- a/chrome/browser/ui/views/tabs/tab_strip_layout_helper.cc
++++ b/chrome/browser/ui/views/tabs/tab_strip_layout_helper.cc
+@@ -222,12 +222,29 @@
+   }
+ 
+   int current_tab_model_index = 0;
++  int pinned_idx = 0;
++  constexpr int kCols = 3;
++  constexpr int kTile = 42;
++  constexpr int kGap = 6;
++  constexpr int kPadX = 8;
++  constexpr int kPadY = 8;
++
+   for (int i = 0; i < static_cast<int>(bounds.size()); ++i) {
+     const TabSlot& slot = slots_[i];
+     switch (slot.type) {
+       case TabSlotView::ViewType::kTab:
+         if (!slot.state.IsClosed()) {
+-          tabs->set_ideal_bounds(current_tab_model_index, bounds[i]);
++          if (slot.state.pinned() == TabPinned::kPinned) {
++            int col = pinned_idx % kCols;
++            int row = pinned_idx / kCols;
++            tabs->set_ideal_bounds(current_tab_model_index,
++                                   gfx::Rect(kPadX + col * (kTile + kGap),
++                                             kPadY + row * (kTile + kGap),
++                                             kTile, kTile));
++            pinned_idx++;
++          } else {
++            tabs->set_ideal_bounds(current_tab_model_index, bounds[i]);
++          }
+           ++current_tab_model_index;
+         }
+         break;
