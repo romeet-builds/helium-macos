@@ -52,6 +52,7 @@ jobs:
       - name: Retrieve Helium & Chromium Resources (CDN Archive)
         run: |
           source ./env.sh
+          mkdir -p "$_download_cache" "$_src_dir"
           ./retrieve_and_unpack_resource.sh -d -g arm64
 
       - name: Apply Helium Patches & Custom macOS SDK Fixes
