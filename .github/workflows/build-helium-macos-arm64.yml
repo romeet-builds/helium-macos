@@ -47,7 +47,7 @@ jobs:
       - name: Install Build Dependencies
         run: |
           brew install coreutils ninja go || true
-          pip3 install httplib2 PySocks --break-system-packages || pip install httplib2 PySocks || true
+          pip3 install httplib2 PySocks pillow --break-system-packages || pip install httplib2 PySocks pillow || true
 
       - name: Retrieve Helium & Chromium Resources (CDN Archive)
         run: |
