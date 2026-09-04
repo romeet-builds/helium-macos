@@ -8,8 +8,8 @@ permissions:
 
 jobs:
   build:
-    # Machine Pool: heliumMacos (Image: osx-tahoe-26, Machine: g2.mac.m2pro.12c-28g)
-    runs-on: bitrise-runner-heliumMacos
+    # Machine Pool: macOS (Image: osx-sonoma-15, Machine: g2.mac.m2pro.12c-28g)
+    runs-on: bitrise-runner-macOS
     timeout-minutes: 1440
 
     steps:
@@ -37,7 +37,7 @@ jobs:
 
       - name: Configure Xcode Developer Environment
         run: |
-          AVAILABLE_XCODE=$(ls -d /Applications/Xcode_16*.app /Applications/Xcode*.app 2>/dev/null | sort -V | tail -n 1)
+          AVAILABLE_XCODE=$(ls -d /Applications/Xcode_15*.app /Applications/Xcode_16*.app /Applications/Xcode*.app 2>/dev/null | sort -V | tail -n 1)
           if [ -n "$AVAILABLE_XCODE" ] && [ -d "$AVAILABLE_XCODE" ]; then
             sudo xcode-select --switch "$AVAILABLE_XCODE/Contents/Developer" 2>/dev/null || \
               sudo xcode-select --switch "$AVAILABLE_XCODE" 2>/dev/null || true
