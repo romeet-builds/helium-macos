@@ -8,8 +8,8 @@ permissions:
 
 jobs:
   build:
-    # Machine Pool: heliumMacOS (Image: osx-sonoma-15, Machine: g2.mac.m2pro.12c-28g)
-    runs-on: bitrise-runner-heliumMacOS
+    # Machine Pool: M2 Pro 12-core, 28GB RAM (Image: osx-sonoma-16, Machine: g2.mac.m2pro.12c-28g)
+    runs-on: bitrise-runner-macOS
     timeout-minutes: 1440
 
     steps:
